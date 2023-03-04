@@ -21,7 +21,7 @@ export class UserEntity {
     @Column()
     rfc: string;
 
-    @Column('int', { width: 8 })
+    @Column('int', { width: 10 })
     phone_number: number;
 
     @Column()

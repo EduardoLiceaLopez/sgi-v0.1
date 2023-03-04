@@ -6,6 +6,9 @@ import { UsersService } from './users/users.service';
 import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserEntity } from './users/entities/user.entity/user.entity';
+import { UsersAccessController } from './users_access/users_access.controller';
+import { UsersAccessService } from './users_access/users_access.service';
+import { UsersAccessModule } from './users_access/users_access.module';
 
 @Module({
   imports: [UsersModule, TypeOrmModule.forRoot({
@@ -19,10 +22,10 @@ import { UserEntity } from './users/entities/user.entity/user.entity';
     entities: [UserEntity],
     autoLoadEntities: true,
     synchronize: true
-  })],
+  }), UsersAccessModule],
 
-  controllers: [AppController, UsersController],
-  providers: [AppService, UsersService],
+  controllers: [AppController, UsersController, UsersAccessController],
+  providers: [AppService, UsersService, UsersAccessService, UsersAccessService],
 })
 
 export class AppModule {}
