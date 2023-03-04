@@ -22,4 +22,7 @@ export class UserDto {
 
     @IsString()
     email: string;
+
+    @IsInt()
+    user_type_id: number;
 }

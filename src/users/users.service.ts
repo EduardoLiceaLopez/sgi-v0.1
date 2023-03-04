@@ -8,10 +8,11 @@ import { UserDto } from './dto/user.dto/user.dto';
 @Injectable()
 export class UsersService {
 
-
     constructor(
-        @InjectRepository(UserEntity)
-        private usersRepository: Repository<UserEntity>
+
+
+      @InjectRepository(UserEntity)
+      private usersRepository: Repository<UserEntity>
     ){};
 
     private users: User[] = [
@@ -70,6 +71,27 @@ export class UsersService {
         }
         throw new NotFoundException(`No se encuentra el usuario de ${id}`);
       };
+      
+  /**
+
+
+    async saveUserAccess(id: number, body: UsersAccessDot){
+
+        const user = await this.userRepository.findOneBy({id: id});
+        console.log(user, id);
+        
+        if (user){
+            const userAccess = this.usersAccessRepository.create(body);
+            userAccess.user_id = user;
+            await this.usersAccessRepository.save(userAccess);
+            return userAccess;
+    
+        }
+
+        throw new NotFoundException(`No encontramos a la persona con ID ${id}`)
+    };
+   */
+
       
 
   

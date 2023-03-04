@@ -9,6 +9,9 @@ import { UserEntity } from './users/entities/user.entity/user.entity';
 import { UsersAccessController } from './users_access/users_access.controller';
 import { UsersAccessService } from './users_access/users_access.service';
 import { UsersAccessModule } from './users_access/users_access.module';
+import { UsersTypesController } from './users_types/users_types.controller';
+import { UsersTypesService } from './users_types/users_types.service';
+import { UsersTypesModule } from './users_types/users_types.module';
 
 @Module({
   imports: [UsersModule, UsersAccessModule, TypeOrmModule.forRoot({
@@ -22,10 +25,10 @@ import { UsersAccessModule } from './users_access/users_access.module';
     entities: [UserEntity],
     autoLoadEntities: true,
     synchronize: true
-  }), UsersAccessModule],
+  }), UsersAccessModule, UsersTypesModule],
 
-  controllers: [AppController, UsersController, UsersAccessController],
-  providers: [AppService, UsersService, UsersAccessService, UsersAccessService],
+  controllers: [AppController, UsersController, UsersAccessController, UsersTypesController],
+  providers: [AppService, UsersService, UsersAccessService, UsersAccessService, UsersTypesService],
 })
 
 export class AppModule {}

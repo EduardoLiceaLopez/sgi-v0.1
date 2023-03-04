@@ -1,7 +1,7 @@
 import { UserAccessEntity } from "src/users_access/entities/user_access.entity/user_access.entity";
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity('Users')
+@Entity('users')
 export class UserEntity {
 
     @PrimaryGeneratedColumn()
