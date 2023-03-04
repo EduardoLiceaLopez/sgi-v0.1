@@ -21,10 +21,11 @@ export class UserEntity {
     @Column()
     rfc: string;
 
-    @Column()
+    @Column('int', { width: 8 })
     phone_number: number;
 
     @Column()
     email: string;
+
 
 }
