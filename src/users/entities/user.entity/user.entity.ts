@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { UserAccessEntity } from "src/users_access/entities/user_access.entity/user_access.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('Users')
 export class UserEntity {
@@ -26,6 +27,9 @@ export class UserEntity {
 
     @Column()
     email: string;
+
+    @OneToMany(()=> UserAccessEntity, userAcces => userAcces.user_id)
+    userAcces: UserAccessEntity[];
 
 
 }

@@ -1,9 +1,9 @@
-import { IsString } from "class-validator";
+import { IsIn, IsInt, IsString } from "class-validator";
+import { UserEntity } from "src/users/entities/user.entity/user.entity";
 
 export class UsersAccessDot {
 
-    @IsString()
-    user_id: number;
+
 
     @IsString()
     user_name: string;
@@ -13,5 +13,9 @@ export class UsersAccessDot {
 
     @IsString()
     user_role: string;
+
+    @IsInt()
+    user_id: UserEntity;
+    
 
 }

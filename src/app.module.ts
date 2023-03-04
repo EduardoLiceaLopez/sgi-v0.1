@@ -11,7 +11,7 @@ import { UsersAccessService } from './users_access/users_access.service';
 import { UsersAccessModule } from './users_access/users_access.module';
 
 @Module({
-  imports: [UsersModule, TypeOrmModule.forRoot({
+  imports: [UsersModule, UsersAccessModule, TypeOrmModule.forRoot({
 
     type: 'mysql',
     host: 'localhost',

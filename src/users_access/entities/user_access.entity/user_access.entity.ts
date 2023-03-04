@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { UserEntity } from "src/users/entities/user.entity/user.entity";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('users_access')
 export class UserAccessEntity {
@@ -6,9 +7,6 @@ export class UserAccessEntity {
 
     @PrimaryGeneratedColumn()
     id: number;
-
-    @Column()
-    user_id:number;
 
     @Column()
     user_name:string;
@@ -19,4 +17,6 @@ export class UserAccessEntity {
     @Column()
     user_role:string;
 
+    @ManyToOne(() => UserEntity, user_id => user_id.id)
+    user_id: UserEntity;
 }
