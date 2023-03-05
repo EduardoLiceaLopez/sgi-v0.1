@@ -12,6 +12,9 @@ import { UsersAccessModule } from './users_access/users_access.module';
 import { UsersTypesController } from './users_types/users_types.controller';
 import { UsersTypesService } from './users_types/users_types.service';
 import { UsersTypesModule } from './users_types/users_types.module';
+import { UsersTypesModule } from './users_types/users_types.module';
+import { UsersTypesController } from './users_types/users_types.controller';
+import { UsersTypesService } from './users_types/users_types.service';
 
 @Module({
   imports: [UsersModule, UsersAccessModule, TypeOrmModule.forRoot({

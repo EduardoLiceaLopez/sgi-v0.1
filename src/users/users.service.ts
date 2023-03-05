@@ -4,16 +4,22 @@ import { UserEntity } from './entities/user.entity/user.entity';
 import { InjectRepository } from '@nestjs/typeorm/dist/common';
 import { Repository } from 'typeorm';
 import { UserDto } from './dto/user.dto/user.dto';
+import { UserTypeEntity } from 'src/users_types/entities/user_type.entity/user_type.entity';
+import { UserTypeDot } from 'src/users_types/dot/user_type.dot/user_type.dot';
 
 @Injectable()
 export class UsersService {
 
-    constructor(
+  constructor(
+    @InjectRepository(UserEntity)
+    private usersRepository : Repository<UserEntity>,
 
+    @InjectRepository(UserTypeEntity)
+    private userTypeRepository : Repository<UserTypeEntity>
 
-      @InjectRepository(UserEntity)
-      private usersRepository: Repository<UserEntity>
     ){};
+
+/////inician los métodos
 
     private users: User[] = [
     ]
@@ -72,25 +78,6 @@ export class UsersService {
         throw new NotFoundException(`No se encuentra el usuario de ${id}`);
       };
       
-  /**
-
-
-    async saveUserAccess(id: number, body: UsersAccessDot){
-
-        const user = await this.userRepository.findOneBy({id: id});
-        console.log(user, id);
-        
-        if (user){
-            const userAccess = this.usersAccessRepository.create(body);
-            userAccess.user_id = user;
-            await this.usersAccessRepository.save(userAccess);
-            return userAccess;
-    
-        }
-
-        throw new NotFoundException(`No encontramos a la persona con ID ${id}`)
-    };
-   */
 
       
 

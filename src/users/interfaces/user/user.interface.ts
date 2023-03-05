@@ -8,5 +8,4 @@ export interface User {
     rfc: string;
     phone_number: number;
     email: string;
-
 }
