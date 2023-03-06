@@ -13,7 +13,7 @@ export class UsersController {
     */
 
 
-   @Get('mostrar')
+   @Get('/')
    findAll() {
      return this.userService.findAll();
    }
@@ -24,7 +24,7 @@ export class UsersController {
     * @returns 
     */
 
-   @Get('buscar/:id')
+   @Get('/:id')
    async find(@Param('id', ParseIntPipe) id: number) {
      return this.userService.getId(id);
    };
@@ -34,7 +34,7 @@ export class UsersController {
     * @param productDto 
     */
 
-   @Post('aniadir')
+   @Post('/')
    createProduct( @Body() productDto: UserDto ) {
      this.userService.insert(productDto);
    };
@@ -46,7 +46,7 @@ export class UsersController {
     * @param body 
     * @returns 
     */
-   @Put('actualizar/:id')
+   @Put('/:id')
    async update(
      @Param('id', new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE })) id: number, 
      @Body() body,
@@ -59,7 +59,7 @@ export class UsersController {
     * Borra o elimina a un usuario según el id indicado
     * @param id 
     */
-   @Delete('borrar/:id')
+   @Delete('/:id')
    @HttpCode(HttpStatus.NO_CONTENT)
    delete(@Param('id') id: number) {
      this.userService.delete(id);
