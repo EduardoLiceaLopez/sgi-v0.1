@@ -11,10 +11,12 @@ export class UsersController {
     * Muestra a todos los usuarios registrados
     * @returns 
     */
-   @Get('ver')
-   getAllProducts() {
-     return this.userService.getAll();
-   };
+
+
+   @Get('mostrar')
+   findAll() {
+     return this.userService.findAll();
+   }
 
    /**
     * Muestra a un usuario en particular (según su id enviado)

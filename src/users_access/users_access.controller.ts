@@ -8,7 +8,7 @@ export class UsersAccessController {
 
     constructor(private readonly usersAccessService: UsersAccessService){};
 
-    @Post(':id/userAcces')
+    @Post('userAcces/:id')
     async createUserAcces(
 
         @Param('id', ParseIntPipe) id: number,
@@ -17,38 +17,5 @@ export class UsersAccessController {
         return this.usersAccessService.saveUserAccess(id, body);
     };
 
-   /*
-    @Get('ver')
-    getAllProducts() {
-      return this.usersAccessService.getAll();
-    }
-  
-    @Get(':id')
-    async find(@Param('id', ParseIntPipe) id: number) {
-      return this.usersAccessService.getId(id);
-    }
-  
-    @Post()
-    createProduct( @Body() userAccessDto: UsersAccessDot ) {
-      this.usersAccessService.insert(userAccessDto);
-    }
-  
- 
-    @Put(':id')
-    async update(
-      @Param('id', new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE })) id: number, 
-      @Body() body,
-    ) {
-      return this.usersAccessService.update(id, body);
-    };
-    
-    
-  
-    @Delete(':id')
-    @HttpCode(HttpStatus.NO_CONTENT)
-    delete(@Param('id') id: number) {
-      this.usersAccessService.delete(id);
-    }
-
-    */
+   
 }

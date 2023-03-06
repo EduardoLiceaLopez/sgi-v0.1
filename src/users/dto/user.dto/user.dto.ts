@@ -1,4 +1,5 @@
 import { IsInt, IsString } from "class-validator";
+import { UsersType } from "src/users_types/entities/users_type.entity";
 
 export class UserDto {
 
@@ -24,5 +25,5 @@ export class UserDto {
     email: string;
 
     @IsInt()
-    user_type_id: number;
+    readonly user_type_id: UsersType;
 }

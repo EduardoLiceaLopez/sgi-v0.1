@@ -4,8 +4,7 @@ import { UserEntity } from './entities/user.entity/user.entity';
 import { InjectRepository } from '@nestjs/typeorm/dist/common';
 import { Repository } from 'typeorm';
 import { UserDto } from './dto/user.dto/user.dto';
-import { UserTypeEntity } from 'src/users_types/entities/user_type.entity/user_type.entity';
-import { UserTypeDot } from 'src/users_types/dot/user_type.dot/user_type.dot';
+
 
 @Injectable()
 export class UsersService {
@@ -13,10 +12,6 @@ export class UsersService {
   constructor(
     @InjectRepository(UserEntity)
     private usersRepository : Repository<UserEntity>,
-
-    @InjectRepository(UserTypeEntity)
-    private userTypeRepository : Repository<UserTypeEntity>
-
     ){};
 
 /////inician los métodos
@@ -24,10 +19,18 @@ export class UsersService {
     private users: User[] = [
     ]
 
-    getAll(){
-        return this.usersRepository.find();
-      };
 
+      async findAll(): Promise<UserEntity[]>{
+
+      return this.usersRepository.find({relations: ['user_type_id']});
+    }
+
+      /**
+       * 
+       *   async findAll(): Promise<UsersType[]>{
+    return this.userTypeRepository.find();
+  }; 
+       */
     getId(id: number): Promise<UserEntity> {
         return this.usersRepository.findOneBy({id: id});
     };

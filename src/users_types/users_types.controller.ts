@@ -1,18 +1,34 @@
-import { Body, Controller, Param, ParseIntPipe, Post } from '@nestjs/common';
-import { UserTypeDot } from './dot/user_type.dot/user_type.dot';
+import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { UsersTypesService } from './users_types.service';
+import { CreateUsersTypeDto } from './dto/create-users_type.dto';
+import { UpdateUsersTypeDto } from './dto/update-users_type.dto';
 
 @Controller('users-types')
 export class UsersTypesController {
+  constructor(private readonly usersTypesService: UsersTypesService) {}
 
-    constructor(private readonly user_typeService: UsersTypesService){}
+  @Post('crear')
+  create(@Body() createUsersTypeDto: CreateUsersTypeDto) {
+    return this.usersTypesService.create(createUsersTypeDto);
+  }
 
-    @Post(':id/userType')
-    async createUserType(
+  @Get('mostrar')
+  findAll() {
+    return this.usersTypesService.findAll();
+  }
 
-        @Param('id', ParseIntPipe) id: number,
-        @Body() body: UserTypeDot, 
-    ){
-        return this //.user_typeService(id, body);
-    };
+  @Get('encontrar/:id')
+  findOne(@Param('id') id: string) {
+    return this.usersTypesService.findOne(+id);
+  }
+
+  @Patch('actualizar/:id')
+  update(@Param('id') id: string, @Body() updateUsersTypeDto: UpdateUsersTypeDto) {
+    return this.usersTypesService.update(+id, updateUsersTypeDto);
+  }
+
+  @Delete('borrar/:id')
+  remove(@Param('id') id: string) {
+    return this.usersTypesService.remove(+id);
+  }
 }

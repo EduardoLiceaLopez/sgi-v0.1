@@ -1,5 +1,6 @@
 import { UserAccessEntity } from "src/users_access/entities/user_access.entity/user_access.entity";
-import { UserTypeEntity } from "src/users_types/entities/user_type.entity/user_type.entity";
+import { UsersType } from "src/users_types/entities/users_type.entity";
+
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('users')
@@ -29,9 +30,12 @@ export class UserEntity {
     @Column()
     email: string;
 
-    @ManyToOne(() => UserTypeEntity, userT => userT.id)
-    user_type_id: number;
-
+    @ManyToOne(
+    () => UsersType,
+    (usersType: UsersType) => usersType.user,
+    )   
+    user_type_id : UsersType;
+    
     @OneToMany(()=> UserAccessEntity, userAcces => userAcces.user_id)
     userAcces: UserAccessEntity[];
 
