@@ -22,7 +22,7 @@ export class UsersService {
 
       async findAll(): Promise<UserEntity[]>{
 
-      return this.usersRepository.find({relations: ['user_type_id']});
+      return this.usersRepository.find({relations: ['user_type_id', 'userAcces']});
     }
 
       /**
