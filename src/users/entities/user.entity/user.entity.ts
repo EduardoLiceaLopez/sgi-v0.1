@@ -1,4 +1,4 @@
-import { UserAccessEntity } from "src/users_access/entities/user_access.entity/user_access.entity";
+import { UsersAccess } from "src/users_access/entities/users_access.entity";
 import { UsersType } from "src/users_types/entities/users_type.entity";
 
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
@@ -36,8 +36,10 @@ export class UserEntity {
     )   
     user_type_id : UsersType;
     
-    @OneToMany(()=> UserAccessEntity, userAcces => userAcces.user_id)
-    userAcces: UserAccessEntity[];
-
+    @OneToMany(
+        () => UsersAccess,
+        (userAccess: UsersAccess) => userAccess.user_id,
+    )
+    userAcces: UsersAccess[];
 
 }

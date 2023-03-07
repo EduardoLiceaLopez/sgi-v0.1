@@ -1,37 +1,40 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserEntity } from 'src/users/entities/user.entity/user.entity';
 import { Repository } from 'typeorm';
-import { UsersAccessDot } from './dto/users_access.dot/users_access.dot';
-import { UserAccessEntity } from './entities/user_access.entity/user_access.entity';
+import { CreateUsersAccessDto } from './dto/create-users_access.dto';
+import { UpdateUsersAccessDto } from './dto/update-users_access.dto';
+import { UsersAccess } from './entities/users_access.entity';
 
 @Injectable()
 export class UsersAccessService {
 
-    constructor(
+  //inyección del repositorio
 
-        @InjectRepository(UserEntity)
-        private userRepository: Repository<UserEntity>,
-        @InjectRepository(UserAccessEntity)
-        private usersAccessRepository: Repository<UserAccessEntity>,
-    ){};
-
-    async saveUserAccess(id: number, body: UsersAccessDot){
-
-        const user = await this.userRepository.findOneBy({id: id});
-        console.log(user, id);
-        
-        if (user){
-            const userAccess = this.usersAccessRepository.create(body);
-            userAccess.user_id = user;
-            await this.usersAccessRepository.save(userAccess);
-            return userAccess;
-    
-        }
-
-        throw new NotFoundException(`No encontramos a la persona con ID ${id}`)
-    };
+  constructor(
+    @InjectRepository(UsersAccess)
+    private userAccesRepository: Repository <UsersAccess>,
+  ){};
 
 
-    
-}
+  create(createUsersAccessDto: CreateUsersAccessDto) {
+    return this.userAccesRepository.save(createUsersAccessDto);
+  }
+
+  async findAll(): Promise<UsersAccess[]> {
+    return this.userAccesRepository.find();
+  }
+
+  async findOne(id: number): Promise <UsersAccess> {
+    return this.userAccesRepository.findOne({
+      where: {id},
+    });
+  };
+  
+  async update(id: number, updateUsersAccessDto: UpdateUsersAccessDto) {
+    return this.userAccesRepository.update(id, updateUsersAccessDto);
+  };
+
+  async remove(id: number) {
+    return this.userAccesRepository.delete({id});
+  }
+};

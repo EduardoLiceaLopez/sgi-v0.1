@@ -20,21 +20,17 @@ export class UsersService {
     ]
 
 
-      async findAll(): Promise<UserEntity[]>{
+    async findAll(): Promise<UserEntity[]>{
 
       return this.usersRepository.find({relations: ['user_type_id', 'userAcces']});
-    }
-
-      /**
-       * 
-       *   async findAll(): Promise<UsersType[]>{
-    return this.userTypeRepository.find();
-  }; 
-       */
-    getId(id: number): Promise<UserEntity> {
-        return this.usersRepository.findOneBy({id: id});
     };
 
+    async findOne(id: number): Promise<UserEntity> {
+      return this.usersRepository.findOne({
+        where: { id },
+        relations: ['user_type_id', 'userAcces'], 
+      });
+    }
     
     async insert(body: UserDto) {
         const user = this.usersRepository.create(body);
@@ -42,14 +38,7 @@ export class UsersService {
         return user;
       };
       
-    /**
-     *método update
-     * 
-     * @param id 
-     * @param body 
-     * @returns el almacenamiento de los
-     *          cambios del usuario (user) 
-     */
+
       async  update(id: number, body: any) {
         const userTem = {
           id,
@@ -63,13 +52,6 @@ export class UsersService {
         throw new NotFoundException(`No se encuentra la persona con el ${id}`);
       };
 
-      /**
-       * método delete 
-       * Borra un registro o en este caso, a un usuario
-       * según el id enviado
-       * @param id 
-       * @returns eliminación de registros de un usuario
-       */
       
       async delete(id: number) {
 

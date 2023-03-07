@@ -26,7 +26,7 @@ export class UsersController {
 
    @Get('/:id')
    async find(@Param('id', ParseIntPipe) id: number) {
-     return this.userService.getId(id);
+     return this.userService.findOne(id);
    };
 
    /**
@@ -35,8 +35,8 @@ export class UsersController {
     */
 
    @Post('/')
-   createProduct( @Body() productDto: UserDto ) {
-     this.userService.insert(productDto);
+   create( @Body() userDto: UserDto ) {
+     this.userService.insert(userDto);
    };
 
    /**
