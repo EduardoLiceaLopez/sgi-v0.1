@@ -52,7 +52,6 @@ export class UsersController {
      @Body() body,
    ) {
      return this.userService.update(id, body);
-     
    };
 
    /**
